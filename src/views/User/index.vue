@@ -1,11 +1,15 @@
 <template>
   <div>
-    <router-view></router-view>
+    User
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'User'
 }
 </script>
+
+<style>
+
+</style>
