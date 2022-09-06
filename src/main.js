@@ -10,11 +10,20 @@ import {
   Row, Col, Badge, Search
   , Image as VanImage
   , Divider
+  , Tag, CellGroup
+  , Image
+  , Dialog
+  , DatetimePicker
 } from 'vant'
 // 引入全部样式
 import 'vant/lib/index.less'
 import diretivesObj from '@/utils/directives'
 
+Vue.use(DatetimePicker)
+Vue.use(Dialog)
+Vue.use(Image)
+Vue.use(CellGroup)
+Vue.use(Tag)
 Vue.use(Divider)
 Vue.use(VanImage)
 Vue.use(Search)

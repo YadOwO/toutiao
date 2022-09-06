@@ -70,12 +70,16 @@
         >
       </div>
     </div>
+
+    <!-- 文章评论区域 -->
+    <CommentList></CommentList>
   </div>
 </template>
 
 <script>
 import { articleDetailAPI, followedUserAPI, unFollowedUserAPI, articleLikeAPI, articleDisLikeAPI } from '@/api'
 import { timeAgo } from '@/utils/date'
+import CommentList from './CommentList.vue'
 
 export default {
   async created () {
@@ -125,6 +129,9 @@ export default {
         })
       }
     }
+  },
+  components: {
+    CommentList
   }
 }
 </script>
