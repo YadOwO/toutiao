@@ -8,6 +8,7 @@ import Search from '@/views/Search'
 import SearchResult from '@/views/Search/SearchResult'
 import ArticleDetail from '@/views/ArticleDetail'
 import UserEditor from '@/views/User/UserEdit'
+import Chat from '@/views/Chat'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,10 @@ const routes = [
   {
     path: '/user_editor',
     component: UserEditor
+  },
+  {
+    path: '/chat',
+    component: Chat
   }
 ]
 
