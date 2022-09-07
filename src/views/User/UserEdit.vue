@@ -15,7 +15,7 @@
           <van-image
             round
             class="avatar"
-            :src="profile.photo"
+            :src="$store.state.userPhoto"
             @click="$refs.iptFile.click()"
           />
           <!-- file 选择框 -->
@@ -70,6 +70,7 @@
 <script>
 import { userProfileAPI, updatePhotoAPI, updateProfileAPI } from '@/api'
 import { Notify } from 'vant'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'UserEdit',
@@ -87,6 +88,7 @@ export default {
   async created () {
     const res = await userProfileAPI()
     this.profile = res.data.data
+    this.SET_USERPHOTO(this.profile.photo)
   },
   methods: {
     // 文件选择方法
@@ -130,7 +132,8 @@ export default {
         // 取消
         done()
       }
-    }
+    },
+    ...mapMutations(['SET_USERPHOTO'])
   }
 }
 </script>

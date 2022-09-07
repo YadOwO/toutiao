@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/views/Login'
-import Layout from '@/views/Layout'
-import Home from '@/views/Home'
-import User from '@/views/User'
-import Search from '@/views/Search'
-import SearchResult from '@/views/Search/SearchResult'
-import ArticleDetail from '@/views/ArticleDetail'
-import UserEditor from '@/views/User/UserEdit'
-import Chat from '@/views/Chat'
+// import Login from '@/views/Login'
+// import Layout from '@/views/Layout'
+// import Home from '@/views/Home'
+// import User from '@/views/User'
+// import Search from '@/views/Search'
+// import SearchResult from '@/views/Search/SearchResult'
+// import ArticleDetail from '@/views/ArticleDetail'
+// import UserEditor from '@/views/User/UserEdit'
+// import Chat from '@/views/Chat'
 
 Vue.use(VueRouter)
 
@@ -19,41 +19,41 @@ const routes = [
   },
   {
     path: '/login',
-    component: Login
+    component: () => import('@/views/Login')
   },
   {
     path: '/layout',
-    component: Layout,
+    component: () => import('@/views/Layout'),
     children: [
       {
         path: 'home',
-        component: Home
+        component: () => import('@/views/Home')
       },
       {
         path: 'User',
-        component: User
+        component: () => import('@/views/User')
       }
     ]
   },
   {
     path: '/search',
-    component: Search
+    component: () => import('@/views/Search')
   },
   { // 搜索结果界面
     path: '/search/:keywords',
-    component: SearchResult
+    component: () => import('@/views/Search/SearchResult')
   },
   {
     path: '/article_detail',
-    component: ArticleDetail
+    component: () => import('@/views/ArticleDetail')
   },
   {
     path: '/user_editor',
-    component: UserEditor
+    component: () => import('@/views/User/UserEdit')
   },
   {
     path: '/chat',
-    component: Chat
+    component: () => import('@/views/Chat')
   }
 ]
 

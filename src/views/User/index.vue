@@ -6,7 +6,7 @@
       <van-cell>
         <!-- 使用 title 插槽来自定义标题 -->
         <template #icon>
-          <img :src="user.photo" alt="" class="avatar">
+          <img :src="$store.state.userPhoto" alt="" class="avatar">
         </template>
         <template #title>
           <span class="username">{{user.name}}</span>

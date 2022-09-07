@@ -15,7 +15,7 @@
           <!-- 右侧是当前用户 -->
           <div class="chat-item right" v-if="obj.name === 'me'">
             <div class="chat-pao">{{ obj.msg }}</div>
-            <van-image fit="cover" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+            <van-image fit="cover" round :src="$store.state.userPhoto" />
           </div>
        </div>
     </div>
