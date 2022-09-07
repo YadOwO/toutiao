@@ -58,6 +58,7 @@ export default {
         console.log(res)
         Notify({ type: 'success', message: '登录成功' })
         setToken(res.data.data.token)
+        localStorage.setItem('refresh_token', res.data.data.refresh_token)
         // 跳转到Layout页面
         this.$router.replace({
           path: '/layout/home'

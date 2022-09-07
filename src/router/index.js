@@ -9,6 +9,7 @@ import VueRouter from 'vue-router'
 // import ArticleDetail from '@/views/ArticleDetail'
 // import UserEditor from '@/views/User/UserEdit'
 // import Chat from '@/views/Chat'
+import { getToken } from '@/utils/token.js'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,16 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/Login')
+    component: () => import('@/views/Login'),
+    // 独享守卫
+    beforeEnter (to, from, next) {
+      // 如果登录了，不要切换到登录界面
+      if (getToken()?.length > 0) {
+        next(false) // 留在原地
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/layout',
@@ -60,5 +70,15 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+// // 路由 - 全局前置守卫
+// router.beforeEach((to, from, next) => {
+//   // 如果登录了，不要切换到登录界面
+//   if (getToken()?.length > 0 && to.path === '/login') {
+//     next(false) // 留在原地
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

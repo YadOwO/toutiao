@@ -1,8 +1,9 @@
 // 基于 axios 封装的请求模块
 import ajax from 'axios'
-import router from '@/router'
+// import router from '@/router'
 import { Notify } from 'vant'
-import { getToken } from '@/utils/token.js'
+import { getToken, removeToken, setToken } from '@/utils/token.js'
+import { refreshTokenAPI } from '@/api'
 
 // 新建一个新的axios实例
 const axios = ajax.create({
@@ -26,12 +27,21 @@ axios.interceptors.response.use(function (response) {
   // 2xx 范围内的状态码都会触发该函数。
   // 对响应数据做点什么
   return response
-}, function (error) {
+}, async function (error) {
   // 如果身份过期（401错误）
   if (error.response.status === 401) {
     Notify({ type: 'warning', message: '身份过期！' })
     // 跳转至登陆界面
-    router.replace('/login')
+    removeToken()
+    // router.replace('/login')
+    // 使用refresh_token换回来的新token继续使用
+    const res = await refreshTokenAPI()
+    // 1.更新token到本地
+    setToken(res.data.data.token)
+    // 2.更新的token在请求头里
+    error.config.headers.Authorization = `Bearer ${res.data.data.token}`
+    // 3.未完成的请求 再一次发起
+    return axios(error.config)
   }
   return Promise.reject(error)
 })
